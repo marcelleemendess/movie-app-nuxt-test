@@ -15,7 +15,7 @@
               <p class="mb-0">Já tem registro?</p>
             </div>
             <div>
-              <button @click="$router.push('/login')" class="btn btn-link" type="button">Login</button>
+              <NuxtLink to="/login" class="btn btn-link" type="button">Login</NuxtLink>
             </div>
           </div>
         </form>

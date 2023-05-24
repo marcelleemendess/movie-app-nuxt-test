@@ -5,31 +5,27 @@
         <NuxtLink to="/" class="nav-link">Home</NuxtLink>
       </li>
       <li class="nav-item">
-        <button  @click="signOut" class=" btn btn-link nav-link">Logout</button>
+        <button @click="signOut" class="btn btn-link nav-link">Logout</button>
       </li>
     </ul>
   </nav>
 </template>
 
- <script>
- export default {
-   name: 'Navbar',
-  asyncData() {
-    $nuxt.$fire.auth.signOut();
+<script>
+export default {
+  props: {
+    isAuthenticated: {
+      type: Boolean,
+      default: false,
+    },
+    signOut: {
+      type: Function,
+      required: true,
+    },
   },
-  methods: {
-  async signOut() {
-    try {
-      await this.$fire.auth.signOut();
-      console.log('User signed out');
-      this.$router.push('/login')
-    } catch (error) {
-      console.error('Sign out error:', error);
-    }
-  }
 }
- }
- </script>
+</script>
 
 <style scoped>
 </style>
+

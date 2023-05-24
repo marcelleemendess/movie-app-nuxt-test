@@ -44,8 +44,6 @@ export default {
     try {
       await this.$fire.auth.signInWithEmailAndPassword(this.auth.email, this.auth.password);
 
-      localStorage.setItem('userLoggedIn', 'true');
-
       this.$router.push('/');
     } catch (error) {
       console.error(error);
@@ -59,10 +57,16 @@ export default {
         this.auth.password = '';
     }
   },
-}
+  },
+  created() {
+    // Check if the user is already authenticated
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      this.$store.commit('SET_USER', user);
+      this.$router.push('/');
+    }
+  },
 }
 </script>
 
-<style scoped>
-</style>
 

@@ -12,9 +12,16 @@ export const actions = {
   async onAuthStateChangedAction({ commit }, { authUser }) {
     if (!authUser) {
       commit('SET_USER', null);
+
+      // Clear the user data from storage if the user is not authenticated
+      localStorage.removeItem('user');
     } else {
       const { uid, email } = authUser;
+      const user = { uid, email };
       commit('SET_USER', { uid, email });
+
+      // Save the user data in storage if the user is authenticated
+      localStorage.setItem('user', JSON.stringify(user));
     }
   },
 
